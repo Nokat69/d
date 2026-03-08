@@ -69,14 +69,14 @@ const TRANSLATIONS = {
   en: {
     nav: { story: 'The Story', collection: 'Collection', contact: 'Contact' },
     hero: { subtitle: 'SOBEL PERFUME', title: 'Crafting', titleItalic: 'Timeless Scents', btn: 'Explore Collection' },
-    story: { subtitle: 'Our Heritage', title: 'A Journey of', titleItalic: 'Botanical Mastery', text: '"Fikri Belhamadia\'s journey began with a single jasmine petal in the gardens of Medina. A Moroccan soul with a deep reverence for nature, he spent years mastering the delicate balance of floral essences. SOBEL is the culmination of his travels—a tribute to the timeless beauty of the earth\'s most precious botanicals."', founder: 'Fikri Belhamadia, Founder' },
+    story: { subtitle: 'Our Heritage', title: 'A Journey of', titleItalic: 'Botanical Mastery', text: 'Fikri Belhamadia spent many years in the landscapes of Medina, where his days were surrounded by the scent of flowers and aromatic plants. A lover of coffee and the rich aroma of roasted beans, he often found inspiration in their warm fragrance. Between nature and the scent of coffee, his passion for perfume slowly grew. After decades among the aromas of the earth and botanicals, he chose to turn this passion into the art of perfume making. From this journey, SOBEL was born an ode to nature and the poetry of scent.', founder: 'Fikri Belhamadia, Founder' },
     collection: { subtitle: 'The Collection', title: 'Signature Essences' },
     contact: { title: 'Embrace the', titleItalic: 'Sublime.', boutique: 'Boutique', address: 'Al Madinah Al Munawwarah, Kingdom of Saudi Arabia', inquiries: 'Inquiries', copyright: '© 2024 SOBEL PERFUME', author: 'By Fikri Belhamadia' }
   },
   ar: {
     nav: { story: 'قصتنا', collection: 'المجموعة', contact: 'اتصل بنا' },
     hero: { subtitle: 'سوبيل للعطور', title: 'صناعة', titleItalic: 'عطور خالدة', btn: 'استكشف المجموعة' },
-    story: { subtitle: 'تراثنا', title: 'رحلة من', titleItalic: 'الإتقان النباتي', text: '"بدأت رحلة فكري بلمادية ببتلة ياسمين واحدة في حدائق المدينة المنورة. روح مغربية بتقدير عميق للطبيعة، قضى سنوات في إتقان التوازن الدقيق للخلاصات الزهرية. سوبيل هو ذروة أسفاره - تحية للجمال الخالد لأثمن نباتات الأرض."', founder: 'فكري بلمادية، المؤسس' },
+    story: { subtitle: 'تراثنا', title: 'رحلة من', titleItalic: 'الإتقان النباتي', text: 'عاش فكري بلحمدية سنوات طويلة في ربوع المدينة المنورة، حيث كانت أيامه تمضي بين عبير الزهور وروائح النباتات. وكان عاشقًا للبن والقهوة، يجد في رائحتهما لحظات تأمل وإلهام. وبين الطبيعة وعبق القهوة، نما شغفه بالعطور. وبعد عقود قضاها بين روائح الأرض والنبات، قرر أن يحوّل هذا الشغف إلى رحلة في صناعة العطور. ومن هذه الرحلة وُلدت SOBEL، احتفاءً بجمال الطبيعة وسحر روائحها.', founder: 'فكري بلمادية، المؤسس' },
     collection: { subtitle: 'المجموعة', title: 'جواهرنا العطرية' },
     contact: { title: 'رائحة', titleItalic: 'فيها هيبة.', boutique: 'البوتيك', address: 'المدينة المنورة، المملكة العربية السعودية', inquiries: 'الاستفسارات', copyright: '© 2024 سوبيل للعطور', author: 'بواسطة فكري بلمادية' }
   }
