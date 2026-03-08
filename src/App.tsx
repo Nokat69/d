@@ -18,11 +18,11 @@ declare global {
 }
 
 const PERFUMES = [
-  { id: 1, name: 'SOBEL NOIR', note: 'Rose, Oud & Smoke', description: 'جو غامض يجمع بين عبير الورد الأحمر والعود مع لمسة دخان خفيف.' },
-  { id: 2, name: 'SOBEL ROYALE', note: 'Royal Essence', description: 'تجربة ملكية فاخرة بخلفية بنفسجية وتاج ذهبي يعكس الإضاءة الفاخرة.' },
-  { id: 3, name: 'SOBEL AMBRE', note: 'Golden Amber', description: 'أحجار العنبر الذهبية مع ضوء دافئ لإحساس شرقي فاخر لا ينسى.' },
-  { id: 4, name: 'SOBEL OUD', note: 'Pure Oud & Incense', description: 'عبق خشب العود مع دخان البخور لأجواء شرقية قوية وأصيلة.' },
-  { id: 5, name: 'SOBEL VELOUR', note: 'Lavender & Velvet', description: 'زهور اللافندر مع خلفية ناعمة تمنحك إحساساً مخملياً فريداً.' },
+  { id: 1, name: 'SOBEL NOIR', note: 'Rose, Oud & Smoke', description: 'A mysterious atmosphere combining red rose and oud with a touch of light smoke.' },
+  { id: 2, name: 'SOBEL ROYALE', note: 'Royal Essence', description: 'A luxurious royal experience with a purple background and a golden crown reflecting luxury lighting.' },
+  { id: 3, name: 'SOBEL AMBRE', note: 'Golden Amber', description: 'Golden amber stones with warm light for an unforgettable luxurious oriental feel.' },
+  { id: 4, name: 'SOBEL OUD', note: 'Pure Oud & Incense', description: 'The scent of oud wood with incense smoke for a strong and authentic oriental atmosphere.' },
+  { id: 5, name: 'SOBEL VELOUR', note: 'Lavender & Velvet', description: 'Lavender flowers with a soft background giving you a unique velvety feel.' },
 ];
 
 export default function App() {
