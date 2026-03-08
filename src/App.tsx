@@ -184,9 +184,9 @@ export default function App() {
             <h2 className="text-[9px] md:text-[10px] uppercase tracking-[0.6em] mb-8 text-[#004d2c] font-bold">
               {t.hero.subtitle}
             </h2>
-            <h1 className="text-5xl md:text-8xl font-serif font-light mb-10 tracking-tight leading-[1.1] text-[#1a1a1a]">
+            <h1 className={`text-5xl md:text-8xl mb-10 tracking-tight leading-[1.1] text-[#1a1a1a] ${lang === 'ar' ? 'font-modern-arabic font-bold' : 'font-serif font-light'}`}>
               {t.hero.title} <br />
-              <span className="italic font-normal">{t.hero.titleItalic}</span>
+              <span className={`${lang === 'ar' ? '' : 'italic font-normal'}`}>{t.hero.titleItalic}</span>
             </h1>
             
             <motion.a 
@@ -226,9 +226,9 @@ export default function App() {
           <div className="space-y-10">
             <div className="space-y-4">
               <h3 className="text-[9px] uppercase tracking-[0.4em] text-[#004d2c] font-bold">{t.story.subtitle}</h3>
-              <h2 className="text-3xl md:text-5xl font-serif leading-tight text-[#1a1a1a]">
+              <h2 className={`text-3xl md:text-5xl leading-tight text-[#1a1a1a] ${lang === 'ar' ? 'font-modern-arabic font-bold' : 'font-serif'}`}>
                 {t.story.title} <br />
-                <span className="italic">{t.story.titleItalic}</span>
+                <span className={`${lang === 'ar' ? '' : 'italic'}`}>{t.story.titleItalic}</span>
               </h2>
             </div>
             <p className="text-base md:text-lg font-light leading-relaxed text-[#1a1a1a]/70 font-serif italic">
@@ -247,7 +247,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-32 space-y-6">
             <h3 className="text-[9px] uppercase tracking-[0.5em] text-[#004d2c] font-bold">{t.collection.subtitle}</h3>
-            <h2 className="text-5xl md:text-7xl font-serif text-[#1a1a1a]">{t.collection.title}</h2>
+            <h2 className={`text-5xl md:text-7xl text-[#1a1a1a] ${lang === 'ar' ? 'font-modern-arabic font-bold' : 'font-serif'}`}>{t.collection.title}</h2>
             <div className="w-20 h-[1px] bg-[#004d2c] mx-auto mt-8" />
           </div>
 
@@ -276,9 +276,9 @@ export default function App() {
       <footer id="contact" className="py-40 px-6 md:px-24 bg-[#1a1a1a] text-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-24">
           <div className="col-span-1 md:col-span-2 space-y-12">
-            <h2 className="text-5xl md:text-8xl font-serif tracking-tighter leading-none">
+            <h2 className={`text-5xl md:text-8xl tracking-tighter leading-none ${lang === 'ar' ? 'font-modern-arabic font-bold' : 'font-serif'}`}>
               {t.contact.title} <br />
-              <span className="italic text-[#004d2c]">{t.contact.titleItalic}</span>
+              <span className={`${lang === 'ar' ? 'text-[#004d2c]' : 'italic text-[#004d2c]'}`}>{t.contact.titleItalic}</span>
             </h2>
             <div className="flex flex-wrap gap-10">
               <a href="https://wa.me/+966539334406" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-5">
