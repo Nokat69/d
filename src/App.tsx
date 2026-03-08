@@ -76,9 +76,9 @@ const TRANSLATIONS = {
   ar: {
     nav: { story: 'قصتنا', collection: 'المجموعة', contact: 'اتصل بنا' },
     hero: { subtitle: 'سوبيل للعطور', title: 'صناعة', titleItalic: 'عطور خالدة', btn: 'استكشف المجموعة' },
-    story: { subtitle: 'تراثنا', title: 'رحلة من', titleItalic: 'الإتقان النباتي', text: 'عاش فكري بلحمدية سنوات طويلة في ربوع المدينة المنورة، حيث كانت أيامه تمضي بين عبير الزهور وروائح النباتات. وكان عاشقًا للبن والقهوة، يجد في رائحتهما لحظات تأمل وإلهام. وبين الطبيعة وعبق القهوة، نما شغفه بالعطور. وبعد عقود قضاها بين روائح الأرض والنبات، قرر أن يحوّل هذا الشغف إلى رحلة في صناعة العطور. ومن هذه الرحلة وُلدت SOBEL، احتفاءً بجمال الطبيعة وسحر روائحها.', founder: 'فكري بلمادية، المؤسس' },
+    story: { subtitle: 'تراثنا', title: 'رحلة من', titleItalic: 'الإتقان النباتي', text: 'عاش فكري بلحمدية سنوات طويلة في ربوع المدينة المنورة، حيث كانت أيامه تمضي بين عبير الزهور وروائح النباتات. وكان عاشقًا للبن والقهوة، يجد في رائحتهما لحظات تأمل وإلهام. وبين الطبيعة وعبق القهوة، نما شغفه بالعطور. وبعد عقود قضاها بين روائح الأرض والنبات، قرر أن يحوّل هذا الشغف إلى رحلة في صناعة العطور. ومن هذه الرحلة وُلدت SOBEL، احتفاءً بجمال الطبيعة وسحر روائحها.', founder: 'فكري بلحمدية، المؤسس' },
     collection: { subtitle: 'المجموعة', title: 'جواهرنا العطرية' },
-    contact: { title: 'رائحة', titleItalic: 'فيها هيبة.', boutique: 'البوتيك', address: 'المدينة المنورة، المملكة العربية السعودية', inquiries: 'الاستفسارات', copyright: '© 2024 سوبيل للعطور', author: 'بواسطة فكري بلمادية' }
+    contact: { title: 'رائحة', titleItalic: 'فيها هيبة.', boutique: 'البوتيك', address: 'المدينة المنورة، المملكة العربية السعودية', inquiries: 'الاستفسارات', copyright: '© 2024 سوبيل للعطور', author: 'بواسطة فكري بلحمدية' }
   }
 };
 
@@ -181,7 +181,7 @@ export default function App() {
                 )}
               </div>
             )}
-            <h2 className="text-[9px] md:text-[10px] uppercase tracking-[0.6em] mb-8 text-[#004d2c] font-bold">
+            <h2 className={`uppercase tracking-[0.6em] mb-8 text-[#004d2c] font-bold ${lang === 'ar' ? 'text-[13px]' : 'text-[9px] md:text-[10px]'}`}>
               {t.hero.subtitle}
             </h2>
             <h1 className={`text-5xl md:text-8xl mb-10 tracking-tight leading-[1.1] text-[#1a1a1a] ${lang === 'ar' ? 'font-modern-arabic font-bold' : 'font-serif font-light'}`}>
@@ -193,7 +193,7 @@ export default function App() {
               href="#collection"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-block px-10 py-4 bg-[#004d2c] text-white text-[9px] uppercase tracking-[0.3em] rounded-sm hover:bg-[#00361f] transition-colors duration-500"
+              className={`inline-block px-10 py-4 bg-[#004d2c] text-white uppercase tracking-[0.3em] rounded-sm hover:bg-[#00361f] transition-colors duration-500 ${lang === 'ar' ? 'text-[12px]' : 'text-[9px]'}`}
             >
               {t.hero.btn}
             </motion.a>
@@ -225,7 +225,7 @@ export default function App() {
           
           <div className="space-y-10">
             <div className="space-y-4">
-              <h3 className="text-[9px] uppercase tracking-[0.4em] text-[#004d2c] font-bold">{t.story.subtitle}</h3>
+              <h3 className={`uppercase tracking-[0.4em] text-[#004d2c] font-bold ${lang === 'ar' ? 'text-[13px]' : 'text-[9px]'}`}>{t.story.subtitle}</h3>
               <h2 className={`text-3xl md:text-5xl leading-tight text-[#1a1a1a] ${lang === 'ar' ? 'font-modern-arabic font-bold' : 'font-serif'}`}>
                 {t.story.title} <br />
                 <span className={`${lang === 'ar' ? '' : 'italic'}`}>{t.story.titleItalic}</span>
@@ -246,7 +246,7 @@ export default function App() {
       <section id="collection" className="py-40 px-6 md:px-24 bg-[#fdfcf8]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-32 space-y-6">
-            <h3 className="text-[9px] uppercase tracking-[0.5em] text-[#004d2c] font-bold">{t.collection.subtitle}</h3>
+            <h3 className={`uppercase tracking-[0.5em] text-[#004d2c] font-bold ${lang === 'ar' ? 'text-[13px]' : 'text-[9px]'}`}>{t.collection.subtitle}</h3>
             <h2 className={`text-5xl md:text-7xl text-[#1a1a1a] ${lang === 'ar' ? 'font-modern-arabic font-bold' : 'font-serif'}`}>{t.collection.title}</h2>
             <div className="w-20 h-[1px] bg-[#004d2c] mx-auto mt-8" />
           </div>
@@ -295,7 +295,7 @@ export default function App() {
                   <Mail size={20} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[8px] uppercase tracking-[0.3em] font-bold text-white/40">{t.contact.inquiries}</span>
+                  <span className={`uppercase tracking-[0.3em] font-bold text-white/40 ${lang === 'ar' ? 'text-[11px]' : 'text-[8px]'}`}>{t.contact.inquiries}</span>
                   <span className="text-[10px] uppercase tracking-[0.1em] font-medium">sobel.fikri@gmail.com</span>
                 </div>
               </a>
@@ -305,13 +305,13 @@ export default function App() {
           <div className="flex flex-col justify-between space-y-16 md:space-y-0">
             <div className="space-y-10">
               <div>
-                <h5 className="text-[9px] uppercase tracking-[0.4em] mb-4 text-[#004d2c] font-bold">{t.contact.boutique}</h5>
+                <h5 className={`uppercase tracking-[0.4em] mb-4 text-[#004d2c] font-bold ${lang === 'ar' ? 'text-[13px]' : 'text-[9px]'}`}>{t.contact.boutique}</h5>
                 <p className="text-xs font-light leading-relaxed text-white/60">
                   {t.contact.address}
                 </p>
               </div>
               <div>
-                <h5 className="text-[9px] uppercase tracking-[0.4em] mb-4 text-[#004d2c] font-bold">{t.contact.inquiries}</h5>
+                <h5 className={`uppercase tracking-[0.4em] mb-4 text-[#004d2c] font-bold ${lang === 'ar' ? 'text-[13px]' : 'text-[9px]'}`}>{t.contact.inquiries}</h5>
                 <p className="text-xs font-light leading-relaxed text-white/60">
                   sobel.fikri@gmail.com
                 </p>
