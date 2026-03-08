@@ -1,20 +1,20 @@
 import { GoogleGenAI } from "@google/genai";
 
 export async function generatePerfumeImage() {
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+  const ai = new GoogleGenAI({ apiKey });
   const response = await ai.models.generateContent({
-    model: 'gemini-3.1-flash-image-preview',
+    model: 'gemini-2.5-flash-image',
     contents: {
       parts: [
         {
-          text: 'A hyper-realistic professional product shot of a luxury perfume bottle. The bottle is square with thick, high-quality clear glass, containing a rich, glowing amber-colored perfume liquid. The cap is a large, sophisticated black octagonal shape with a polished rose-gold or bronze metallic neck. On the front of the bottle, there is a prominent circular dark green logo with a white serif "S" in the center, and the words "SOBEL PERFUME" in elegant white lettering below it. The bottle sits on a premium dark leather surface. The background is dark, moody, and atmospheric with subtle warm lighting and a hint of mist. Cinematic lighting, 8k resolution, ultra-detailed.',
+          text: 'A professional, high-end product photograph of a luxury perfume bottle. The bottle is elegant, clear glass with a dark emerald green cap. It is surrounded by fresh, delicate white jasmine flowers and deep green leaves. The lighting is bright, natural, and airy, as if in a sunlit garden or a high-end boutique. The background is a soft, blurred off-white or cream texture. The overall aesthetic is clean, floral, and sophisticated. 8k resolution, cinematic lighting.',
         },
       ],
     },
     config: {
       imageConfig: {
-        aspectRatio: "1:1",
-        imageSize: "1K"
+        aspectRatio: "1:1"
       },
     },
   });

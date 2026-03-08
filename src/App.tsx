@@ -5,61 +5,72 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MapPin, Phone, Mail, Menu, X, ChevronRight } from 'lucide-react';
+import { MapPin, Phone, Mail, Menu, X, ChevronRight, MessageCircle } from 'lucide-react';
 import { generatePerfumeImage } from './services/imageService';
 
+declare global {
+  interface Window {
+    aistudio?: {
+      hasSelectedApiKey: () => Promise<boolean>;
+      openSelectKey: () => Promise<void>;
+    };
+  }
+}
+
 const PERFUMES = [
-  { id: 1, name: 'Sovereign', note: 'Oud & Amber', description: 'A majestic blend of traditional oud with modern warmth.' },
-  { id: 2, name: 'Oasis', note: 'Bergamot & Sea Salt', description: 'Refreshing as a hidden spring in the heart of the desert.' },
-  { id: 3, name: 'Beloved', note: 'Rose & Musk', description: 'An intimate fragrance that captures the essence of devotion.' },
-  { id: 4, name: 'Eternal', note: 'Sandalwood & Vanilla', description: 'A timeless scent that lingers like a cherished memory.' },
-  { id: 5, name: 'Legacy', note: 'Leather & Spices', description: 'Bold and sophisticated, honoring the heritage of Fikri Belhamadia.' },
+  { id: 1, name: 'SOBEL NOIR', note: 'Rose, Oud & Smoke', description: 'جو غامض يجمع بين عبير الورد الأحمر والعود مع لمسة دخان خفيف.' },
+  { id: 2, name: 'SOBEL ROYALE', note: 'Royal Essence', description: 'تجربة ملكية فاخرة بخلفية بنفسجية وتاج ذهبي يعكس الإضاءة الفاخرة.' },
+  { id: 3, name: 'SOBEL AMBRE', note: 'Golden Amber', description: 'أحجار العنبر الذهبية مع ضوء دافئ لإحساس شرقي فاخر لا ينسى.' },
+  { id: 4, name: 'SOBEL OUD', note: 'Pure Oud & Incense', description: 'عبق خشب العود مع دخان البخور لأجواء شرقية قوية وأصيلة.' },
+  { id: 5, name: 'SOBEL VELOUR', note: 'Lavender & Velvet', description: 'زهور اللافندر مع خلفية ناعمة تمنحك إحساساً مخملياً فريداً.' },
 ];
 
 export default function App() {
-  const [heroImage, setHeroImage] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isContactHovered, setIsContactHovered] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [needsApiKey, setNeedsApiKey] = useState(false);
 
   useEffect(() => {
-    const loadImage = async () => {
-      try {
-        const img = await generatePerfumeImage();
-        setHeroImage(img);
-      } catch (error) {
-        console.error('Failed to load image:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadImage();
+    // Keeping this for potential future use or just removing if not needed
+    // For now, we'll just stop the loading state as we don't need the hero image
+    const timer = setTimeout(() => {
+      // No-op
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
+  const handleSelectKey = async () => {
+    if (window.aistudio && window.aistudio.openSelectKey) {
+      await window.aistudio.openSelectKey();
+      // Reload image after key selection
+      window.location.reload();
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#050505] text-[#F5F2ED] selection:bg-[#5A5A40] selection:text-white">
+    <div className="min-h-screen bg-[#fdfcf8] text-[#1a1a1a] selection:bg-[#004d2c] selection:text-white font-sans">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-8 md:px-12 backdrop-blur-sm bg-black/20">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-16 bg-black/90 backdrop-blur-md border-b border-white/10">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-[#004D2C] rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-3xl font-serif font-bold text-white leading-none mb-1">S</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-serif tracking-[0.2em] uppercase leading-none">SOBEL</span>
-            <span className="text-[8px] tracking-[0.4em] uppercase opacity-50">PERFUME</span>
-          </div>
+          <img 
+            src="https://lh3.googleusercontent.com/d/1-ohtqevsbA-pZtGsu6uflgugf_qugWGB" 
+            alt="SOBEL Logo" 
+            className="h-12 w-auto object-contain"
+          />
         </div>
         
-        <div className="hidden md:flex items-center gap-12 text-[10px] uppercase tracking-[0.3em] font-medium opacity-70">
-          <a href="#about" className="hover:opacity-100 transition-opacity">The Founder</a>
-          <a href="#collection" className="hover:opacity-100 transition-opacity">Collection</a>
-          <a href="#contact" className="hover:opacity-100 transition-opacity">Contact</a>
+        <div className="hidden md:flex items-center gap-10 text-[9px] uppercase tracking-[0.25em] font-semibold text-white/70">
+          <a href="#about" className="hover:text-white transition-colors">The Story</a>
+          <a href="#collection" className="hover:text-white transition-colors">Collection</a>
+          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
         </div>
 
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2"
+          className="md:hidden p-2 text-white"
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
@@ -67,12 +78,12 @@ export default function App() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center gap-8 text-xl font-serif tracking-widest uppercase"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            className="fixed inset-0 z-40 bg-[#fdfcf8] flex flex-col items-center justify-center gap-10 text-lg font-serif tracking-widest uppercase"
           >
-            <a href="#about" onClick={() => setIsMenuOpen(false)}>The Founder</a>
+            <a href="#about" onClick={() => setIsMenuOpen(false)}>The Story</a>
             <a href="#collection" onClick={() => setIsMenuOpen(false)}>Collection</a>
             <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
           </motion.div>
@@ -80,114 +91,110 @@ export default function App() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-6">
-        <div className="absolute inset-0 z-0">
-          {heroImage ? (
-            <motion.img 
-              key="hero-image"
-              initial={{ scale: 1.1, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.7 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              src={heroImage} 
-              alt="SOBEL Luxury Perfume" 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-          ) : (
-            <div className="w-full h-full bg-[#0a0a0a]" />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#050505]" />
-        </div>
-
-        <div className="relative z-10 text-center max-w-4xl">
+      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-[#fdfcf8]">
+        <div className="relative z-10 text-center px-6">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
+            transition={{ delay: 0.5, duration: 1.2 }}
+            className="max-w-4xl mx-auto"
           >
-            <h2 className="text-[10px] md:text-xs uppercase tracking-[0.5em] mb-6 opacity-60 font-medium">
-              Medina, Saudi Arabia
-            </h2>
-            <h1 className="text-6xl md:text-9xl font-serif font-light mb-8 tracking-tight leading-none">
-              Crafting <br />
-              <span className="italic">Timeless Scents</span>
-            </h1>
-            <p className="text-sm md:text-lg font-light tracking-widest uppercase opacity-80 mb-12 max-w-xl mx-auto leading-relaxed">
-              نصوغ عطراً لا يزول
-            </p>
-            
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-              <div className="px-8 py-4 border border-white/20 rounded-full text-[10px] uppercase tracking-[0.3em] backdrop-blur-md bg-white/5">
-                Coming Soon | قريباً الإطلاق
+            {error && (
+              <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-sm text-red-600 text-[10px] uppercase tracking-widest">
+                {error}
+                {needsApiKey && (
+                  <button 
+                    onClick={handleSelectKey}
+                    className="ml-4 underline hover:text-red-800 transition-colors"
+                  >
+                    Select API Key
+                  </button>
+                )}
               </div>
-            </div>
+            )}
+            <h2 className="text-[9px] md:text-[10px] uppercase tracking-[0.6em] mb-8 text-[#004d2c] font-bold">
+              SOBEL PERFUME
+            </h2>
+            <h1 className="text-5xl md:text-8xl font-serif font-light mb-10 tracking-tight leading-[1.1] text-[#1a1a1a]">
+              Crafting <br />
+              <span className="italic font-normal">Timeless Scents</span>
+            </h1>
+            
+            <motion.a 
+              href="#collection"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-10 py-4 bg-[#1a1a1a] text-white text-[9px] uppercase tracking-[0.3em] rounded-sm hover:bg-[#004d2c] transition-colors duration-500"
+            >
+              Explore Collection
+            </motion.a>
           </motion.div>
         </div>
 
         <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-30"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2.5 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-20"
         >
-          <div className="w-[1px] h-16 bg-white" />
+          <div className="w-[1px] h-12 bg-[#1a1a1a]" />
         </motion.div>
       </section>
 
-      {/* Founder Section */}
-      <section id="about" className="py-32 px-6 md:px-24 bg-[#080808]">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-24 items-center">
-          <div className="order-2 md:order-1">
-            <h3 className="text-[10px] uppercase tracking-[0.4em] mb-8 text-[#5A5A40] font-bold">The Visionary</h3>
-            <h2 className="text-4xl md:text-6xl font-serif mb-8 leading-tight">
-              Fikri Belhamadia <br />
-              <span className="text-2xl md:text-3xl opacity-60 italic">Founder of SOBEL</span>
-            </h2>
-            <p className="text-lg font-light leading-relaxed opacity-70 mb-8 font-serif">
-              A Moroccan soul with a heart for exploration, Fikri Belhamadia is a traveler and a lover of nature. His passion for the earth's botanicals and the art of plant care led him on a lifelong journey of discovery. After years of wandering through diverse landscapes and mastering the delicate balance of natural elements, he decided to channel his experiences into crafting unique, evocative fragrances that tell the story of his travels.
-            </p>
-            <div className="flex items-center gap-4 text-sm tracking-widest uppercase opacity-50">
-              <MapPin size={16} />
-              <span>Medina, KSA | Moroccan Heritage</span>
+      {/* Story Section */}
+      <section id="about" className="py-40 px-6 md:px-24 bg-white">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+          <div className="relative">
+            <div className="aspect-[3/2] overflow-hidden rounded-sm shadow-2xl bg-[#f5f2ed]">
+              <img 
+                src="https://lh3.googleusercontent.com/d/1YsCnKiGxAbQ4dk-Cq-LhZ_pRX1eEk5z-" 
+                alt="SOBEL Perfume Collection" 
+                className="w-full h-full object-cover"
+              />
             </div>
+            <div className="absolute -bottom-10 -right-10 w-48 h-48 border border-[#004d2c]/20 rounded-full hidden md:block" />
           </div>
-          <div className="order-1 md:order-2 relative aspect-[3/4] overflow-hidden rounded-2xl">
-             <img 
-              src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1000" 
-              alt="Luxury Fragrance" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 border-[20px] border-black/10" />
+          
+          <div className="space-y-10">
+            <div className="space-y-4">
+              <h3 className="text-[9px] uppercase tracking-[0.4em] text-[#004d2c] font-bold">Our Heritage</h3>
+              <h2 className="text-3xl md:text-5xl font-serif leading-tight text-[#1a1a1a]">
+                A Journey of <br />
+                <span className="italic">Botanical Mastery</span>
+              </h2>
+            </div>
+            <p className="text-base md:text-lg font-light leading-relaxed text-[#1a1a1a]/70 font-serif italic">
+              "Fikri Belhamadia's journey began with a single jasmine petal in the gardens of Medina. A Moroccan soul with a deep reverence for nature, he spent years mastering the delicate balance of floral essences. SOBEL is the culmination of his travels—a tribute to the timeless beauty of the earth's most precious botanicals."
+            </p>
+            <div className="pt-6 flex items-center gap-6">
+              <div className="w-12 h-[1px] bg-[#004d2c]" />
+              <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-[#1a1a1a]/40">Fikri Belhamadia, Founder</span>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Collection Section */}
-      <section id="collection" className="py-32 px-6 md:px-24">
+      <section id="collection" className="py-40 px-6 md:px-24 bg-[#fdfcf8]">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
-            <div>
-              <h3 className="text-[10px] uppercase tracking-[0.4em] mb-4 text-[#5A5A40] font-bold">The Collection</h3>
-              <h2 className="text-5xl md:text-7xl font-serif">Five Essences</h2>
-            </div>
-            <p className="max-w-md text-sm uppercase tracking-widest opacity-50 leading-loose">
-              Each fragrance is a chapter of a story. A journey from the desert dunes to the heart of the sanctuary.
-            </p>
+          <div className="text-center mb-32 space-y-6">
+            <h3 className="text-[9px] uppercase tracking-[0.5em] text-[#004d2c] font-bold">The Collection</h3>
+            <h2 className="text-5xl md:text-7xl font-serif text-[#1a1a1a]">Signature Essences</h2>
+            <div className="w-20 h-[1px] bg-[#004d2c] mx-auto mt-8" />
           </div>
 
-          <div className="grid md:grid-cols-5 gap-1">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
             {PERFUMES.map((perfume, idx) => (
               <motion.div 
                 key={perfume.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                className="group relative bg-[#0a0a0a] p-12 border border-white/5 hover:bg-[#111] transition-all duration-500 cursor-default"
+                transition={{ delay: idx * 0.1, duration: 0.8 }}
+                className="group bg-white p-10 border border-[#004d2c]/5 hover:border-[#004d2c]/20 transition-all duration-700 shadow-sm hover:shadow-xl text-center"
               >
-                <span className="text-[10px] font-mono opacity-30 mb-12 block">0{perfume.id}</span>
-                <h4 className="text-2xl font-serif mb-4 group-hover:text-[#5A5A40] transition-colors">{perfume.name}</h4>
-                <p className="text-[10px] uppercase tracking-widest mb-8 opacity-60">{perfume.note}</p>
-                <p className="text-xs font-light leading-relaxed opacity-40 group-hover:opacity-80 transition-opacity">
+                <span className="text-[9px] font-sans text-[#004d2c] mb-8 block font-bold tracking-widest">0{perfume.id}</span>
+                <h4 className="text-xl font-serif mb-4 text-[#1a1a1a] group-hover:text-[#004d2c] transition-colors">{perfume.name}</h4>
+                <p className="text-[8px] uppercase tracking-[0.2em] mb-8 text-[#1a1a1a]/40 font-bold">{perfume.note}</p>
+                <p className="text-[11px] font-light leading-relaxed text-[#1a1a1a]/60 italic">
                   {perfume.description}
                 </p>
               </motion.div>
@@ -196,60 +203,106 @@ export default function App() {
         </div>
       </section>
 
-      {/* Footer / Contact */}
-      <footer id="contact" className="py-32 px-6 md:px-24 border-t border-white/5">
+      {/* Contact Section */}
+      <footer id="contact" className="py-40 px-6 md:px-24 bg-[#1a1a1a] text-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-24">
-          <div className="col-span-1 md:col-span-2">
-            <h2 className="text-5xl md:text-8xl font-serif mb-12 tracking-tighter">
-              Experience <br />
-              <span className="italic">The Eternal.</span>
+          <div className="col-span-1 md:col-span-2 space-y-12">
+            <h2 className="text-5xl md:text-8xl font-serif tracking-tighter leading-none">
+              Embrace the <br />
+              <span className="italic text-[#004d2c]">Sublime.</span>
             </h2>
-            <div className="flex flex-wrap gap-12">
-              <a href="https://wa.me/+966539334406" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#25D366] group-hover:border-[#25D366] group-hover:text-white transition-all">
+            <div className="flex flex-wrap gap-10">
+              <a href="https://wa.me/+966539334406" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-5">
+                <div className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#004d2c] group-hover:border-[#004d2c] transition-all duration-500">
                   <Phone size={20} />
                 </div>
-                <span className="text-[10px] uppercase tracking-[0.3em] font-medium">WhatsApp</span>
+                <div className="flex flex-col">
+                  <span className="text-[8px] uppercase tracking-[0.3em] font-bold text-white/40">WhatsApp</span>
+                  <span className="text-[10px] uppercase tracking-[0.1em] font-medium">+966 53 933 4406</span>
+                </div>
               </a>
-              <a href="mailto:sobel.fikri@gmail.com" className="group flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+              <a href="mailto:sobel.fikri@gmail.com" className="group flex items-center gap-5">
+                <div className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-500">
                   <Mail size={20} />
                 </div>
-                <span className="text-[10px] uppercase tracking-[0.3em] font-medium">Email</span>
+                <div className="flex flex-col">
+                  <span className="text-[8px] uppercase tracking-[0.3em] font-bold text-white/40">Email</span>
+                  <span className="text-[10px] uppercase tracking-[0.1em] font-medium">sobel.fikri@gmail.com</span>
+                </div>
               </a>
             </div>
           </div>
           
-          <div className="flex flex-col justify-between">
-            <div className="space-y-8">
+          <div className="flex flex-col justify-between space-y-16 md:space-y-0">
+            <div className="space-y-10">
               <div>
-                <h5 className="text-[10px] uppercase tracking-[0.4em] mb-4 opacity-40">Boutique</h5>
-                <p className="text-sm font-light leading-relaxed opacity-70">
+                <h5 className="text-[9px] uppercase tracking-[0.4em] mb-4 text-[#004d2c] font-bold">Boutique</h5>
+                <p className="text-xs font-light leading-relaxed text-white/60">
                   Al Madinah Al Munawwarah<br />
                   Kingdom of Saudi Arabia
                 </p>
               </div>
               <div>
-                <h5 className="text-[10px] uppercase tracking-[0.4em] mb-4 opacity-40">Inquiries</h5>
-                <p className="text-sm font-light leading-relaxed opacity-70">
+                <h5 className="text-[9px] uppercase tracking-[0.4em] mb-4 text-[#004d2c] font-bold">Inquiries</h5>
+                <p className="text-xs font-light leading-relaxed text-white/60">
                   sobel.fikri@gmail.com
                 </p>
               </div>
             </div>
             
-            <div className="pt-12 mt-12 border-t border-white/5 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] opacity-30">
-              <span>&copy; 2024 SOBEL</span>
+            <div className="pt-12 border-t border-white/10 flex items-center justify-between text-[8px] uppercase tracking-[0.3em] text-white/30 font-bold">
+              <span>&copy; 2024 SOBEL PERFUME</span>
               <span>By Fikri Belhamadia</span>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Custom Cursor / Accent */}
-      <div className="fixed bottom-8 right-8 z-50">
-        <div className="w-16 h-16 rounded-full bg-[#004D2C] flex items-center justify-center text-white shadow-2xl animate-pulse cursor-pointer border border-white/10">
-          <span className="text-2xl font-serif font-bold leading-none mb-1">S</span>
-        </div>
+      {/* Floating Action */}
+      <div 
+        className="fixed bottom-10 right-10 z-50 flex flex-col items-end gap-4"
+        onMouseEnter={() => setIsContactHovered(true)}
+        onMouseLeave={() => setIsContactHovered(false)}
+      >
+        <AnimatePresence>
+          {isContactHovered && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.8 }}
+              className="flex flex-col gap-3 mb-2"
+            >
+              <motion.a 
+                href="https://wa.me/966500000000" 
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.1 }}
+                className="w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center text-[#25D366] border border-gray-100"
+              >
+                <MessageCircle size={20} />
+              </motion.a>
+              <motion.a 
+                href="mailto:sobel.fikri@gmail.com" 
+                whileHover={{ scale: 1.1 }}
+                className="w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center text-[#004d2c] border border-gray-100"
+              >
+                <Mail size={20} />
+              </motion.a>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.div 
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="w-14 h-14 rounded-full bg-black flex items-center justify-center text-white shadow-2xl cursor-pointer border border-white/20"
+        >
+          <img 
+            src="https://lh3.googleusercontent.com/d/1-ohtqevsbA-pZtGsu6uflgugf_qugWGB" 
+            alt="S" 
+            className="w-8 h-8 object-contain"
+          />
+        </motion.div>
       </div>
     </div>
   );
